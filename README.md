@@ -15,7 +15,7 @@
    - At the lines: 21.
         + Access your google drive -> Create a folder -> Share with everyone (note: share with editing permission) 
           -> Get the id of that folder.
-        + Example: Folder share link is: https://drive.google.com/drive/folders/**1kX0Ok5lauXb2H_JtWhZgWERqSC4_yiuy**?usp=drive_link
+        + Example: Folder share link is: https://drive.google.com/drive/folders/1kX0Ok5lauXb2H_JtWhZgWERqSC4_yiuy?usp=drive_link
         + "**1kX0Ok5lauXb2H_JtWhZgWERqSC4_yiuy**" is the folder id.
         + Copy the folder id and paste it on line 21.
 8. Run at terminal: yarn
