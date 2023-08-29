@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ./partials/head.ejs %>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body class="g-sidenav-show bg-gray-200">
+    <% include ./partials/navbar.ejs %>
+
+    <main
+      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
+    >
+      <div class="comp-list">
+        <div class="container-fluid py-4">
+          <!--  -->
+          <div class="mb-md-0 mb-4">
+            <div class="card my-4">
+              <div
+                class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
+              >
+                <div
+                  class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center"
+                >
+                  <h6 class="text-white text-capitalize ps-3">
+                    Document management
+                  </h6>
+                  <form action="/" method="GET" class="d-flex gap-3">
+                    <input
+                      type="date"
+                      id="dateView"
+                      name="dateView"
+                      class="px-2 py-1 rounded h-100"
+                    />
+                    <button
+                      class="btn btn-success m-0 py-2"
+                      style="margin-right: 1rem !important"
+                    >
+                      Sort
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <div class="card-body px-0 pb-2 pt-3">
+                <div
+                  class="table-responsive"
+                  style="overflow: auto; height: 76vh"
+                >
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr
+                        style="
+                          position: sticky;
+                          top: 0;
+                          z-index: 1000;
+                          background-color: #fff;
+                        "
+                      >
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7"
+                        >
+                          NO
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                          style="width: 10rem"
+                        >
+                          Image
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                        >
+                          Content
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                        >
+                          Comment content
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                        >
+                          Driver
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                        >
+                          Link
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                        >
+                          Date
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder align-middle my-auto text-end m-0"
+                        >
+                          <button
+                            class="btn btn-primary m-0"
+                            id="btn-add-customer"
+                          >
+                            Add Document
+                          </button>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% documents.forEach((item, index) => {%>
+                      <tr class="document">
+                        <td class="align-middle text-sm">
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-light w-limit text-center"
+                          >
+                            <%= (index + 1) %>
+                          </p>
+                        </td>
+                        <td class="pr-3">
+                          <div
+                            class="flex flex-nowrap overflow-x-scroll hideScroll"
+                          >
+                            <% item.images.forEach((image) => {%>
+                            <img
+                              src="/img/uploads/documents/<%= image %>"
+                              class="w-40 rounded"
+                              alt="xd"
+                            />
+                            <%})%>
+                          </div>
+                        </td>
+                        <td class="align-middle text-sm">
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-light w-limit"
+                          >
+                            <%= item.title %>
+                          </p>
+                        </td>
+                        <td class="align-middle text-sm">
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-light w-limit"
+                          >
+                            <%= item.description%>
+                          </p>
+                        </td>
+                        <td class="align-middle text-sm">
+                          <% if (item.video) { %>
+                          <a
+                            href="<%= item.video%>"
+                            target="_blank"
+                            class="text-sm pb-0 mb-0 font-weight-normal w-limit-2"
+                          >
+                            LINK
+                          </a>
+                          <% } else { %>
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-normal w-limit-2"
+                          >
+                            NO LINK
+                          </p>
+                          <% } %>
+                        </td>
+                        <td class="align-middle text-sm">
+                          <% if (item.link) { %>
+                          <a
+                            href="https://<%= item.link%>"
+                            target="_blank"
+                            class="text-sm pb-0 mb-0 font-weight-normal w-limit-2"
+                          >
+                            <%= item.link %>
+                          </a>
+                          <% } else { %>
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-normal w-limit-2"
+                          >
+                            NO LINK
+                          </p>
+                          <% } %>
+                        </td>
+                        <td class="align-middle text-sm">
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-light w-limit-2"
+                          >
+                            <%= new
+                            Date(item.createdAt).toISOString().substring(0,
+                            10)%>
+                          </p>
+                        </td>
+                        <td
+                          class="align-middle m-0 my-auto text-end text-center d-flex"
+                          style="gap: 1rem; padding: 1rem"
+                        >
+                          <form action="/document/update/<%= item.id %>">
+                            <button
+                              class="update btn btn-primary m-0"
+                              id="update-document"
+                            >
+                              Update
+                            </button>
+                          </form>
+
+                          <button
+                            class="btn-del-document del btn btn-danger m-0"
+                            data-id="<%= item.id %>"
+                          >
+                            Del
+                          </button>
+                        </td>
+                      </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+
+          <!-- add document -->
+          <div class="add-customer-form">
+            <div id="close-add-customer-btn" class="fas fa-times"></div>
+
+            <form
+              action="/"
+              method="POST"
+              id="create-document-form"
+              enctype="multipart/form-data"
+            >
+              <h3 class="text-center">Document</h3>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <span>Content</span>
+                    <input
+                      type="text"
+                      name="title"
+                      class="form-control"
+                      placeholder="Title..."
+                      id="title"
+                    />
+                    <span class="form-message"></span>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <span>Link</span>
+                    <input
+                      type="text"
+                      name="link"
+                      class="form-control"
+                      placeholder="www.example.com"
+                      id="link"
+                    />
+                    <span class="form-message"></span>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <span>Comment content</span>
+                    <textarea
+                      class="form-control"
+                      name="description"
+                      id="description"
+                      cols="30"
+                      rows="5"
+                      placeholder="Description..."
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <span>Images</span>
+                    <input
+                      type="file"
+                      name="images"
+                      class="form-control"
+                      id="images"
+                      accept=".jpg, .png"
+                      multiple
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <span>Videos</span>
+                    <input
+                      type="file"
+                      name="images"
+                      class="form-control"
+                      id="videos"
+                      accept=".mp4"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="btn-Document mt-4 text-center">
+                <input
+                  type="submit"
+                  value="Create Document"
+                  class="btn btn-primary pe-3 ps-3 text-md"
+                />
+              </div>
+            </form>
+          </div>
+
+          <!-- question delete -->
+          <div class="quesDel">
+            <div class="main">
+              <div class="content">
+                <h3>You definitely want to delete this document?</h3>
+                <div class="btn-reply d-flex mt-3">
+                  <button id="yes">Yes</button>
+                  <button id="no">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <% include ./partials/extend.ejs %>
+    <script src="/js/login.js"></script>
+    <script src="/js/document.js"></script>
+  </body>
+</html>

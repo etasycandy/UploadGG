@@ -1,0 +1,42 @@
+html { box-sizing: border-box; }
+
+*,
+*::before,
+*::after { box-sizing: inherit; }
+
+body * {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: normal 100%/1.15 "Merriweather", serif;
+  background: #fff url("../img/texture.jpg") repeat 0 0;
+  color: #fff;
+}
+
+.dog {
+  width: 100%; height: 40vh; overflow: hidden; margin-top: 4rem
+}
+
+.fence{
+   position: relative;top: -2rem;width: 100%;height: 30vh;overflow: hidden;
+}
+
+p {
+  font-size: 23px;
+}
+
+a{
+  color: #27ae60;
+ }
+
+ @media screen and (max-width: 800px) {
+.dog{
+  height: 50%;
+}
+.fence{
+  height: 40%;
+
+}
+ }

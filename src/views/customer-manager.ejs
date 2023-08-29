@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ./partials/head.ejs %>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body class="g-sidenav-show bg-gray-200">
+    <% if (type != 'login') { %> <% if (error) { %>
+    <div
+      class="message-error"
+      style="z-index: 100; position: absolute; bottom: 1rem; right: 1.5rem"
+    >
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Account creation failed!</strong> <%= error %>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
+    <% }} %> <% include ./partials/navbar.ejs %>
+
+    <main
+      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
+    >
+      <div class="comp-list">
+        <div class="container-fluid py-4">
+          <!--  -->
+          <div class="mb-md-0 mb-4">
+            <div class="card my-4">
+              <div
+                class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
+              >
+                <div
+                  class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
+                >
+                  <h6 class="text-white text-capitalize ps-3">
+                    Customer management
+                  </h6>
+                </div>
+              </div>
+              <div class="card-body px-0 pb-2 pt-3">
+                <div
+                  class="table-responsive"
+                  style="overflow: auto; height: 76vh"
+                >
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr
+                        style="
+                          position: sticky;
+                          top: 0;
+                          z-index: 1000;
+                          background-color: #fff;
+                        "
+                      >
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7"
+                        >
+                          NO
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                          style="width: 5rem"
+                        >
+                          Avatar
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                        >
+                          Username
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                        >
+                          Email
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                        >
+                          Phone Number
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                        >
+                          Fullname
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2"
+                        >
+                          Date Created
+                        </th>
+                        <th
+                          class="text-uppercase text-secondary text-xs font-weight-bolder align-middle my-auto text-end m-0"
+                        >
+                          <button
+                            class="btn btn-primary m-0"
+                            id="btn-add-customer"
+                          >
+                            Add Customers
+                          </button>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% customers.forEach((item, index) => {%>
+                      <tr class="document">
+                        <td class="align-middle text-sm">
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-light w-limit text-center"
+                          >
+                            <%= (index + 1) %>
+                          </p>
+                        </td>
+                        <td>
+                          <img
+                            src="/img/uploads/<%= item.avatar%>"
+                            class="w-80 rounded"
+                            alt="xd"
+                          />
+                        </td>
+                        <td class="align-middle text-sm">
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-normal w-limit"
+                          >
+                            <%= item.username%>
+                          </p>
+                        </td>
+                        <td class="align-middle text-sm">
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-light w-limit"
+                          >
+                            <%= item.email%>
+                          </p>
+                        </td>
+                        <td class="align-middle text-sm">
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-light w-limit-2"
+                          >
+                            <%= item.phoneNumber%>
+                          </p>
+                        </td>
+                        <td class="align-middle text-sm">
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-light w-limit-2"
+                          >
+                            <%= item.fullName%>
+                          </p>
+                        </td>
+                        <td class="align-middle text-sm">
+                          <p
+                            class="text-sm pb-0 mb-0 font-weight-light w-limit-2"
+                          >
+                            <!-- <%= new Date(item.createdAt).toLocaleString()%> -->
+                            <%= new
+                            Date(item.createdAt).toISOString().substring(0,
+                            10)%>
+                          </p>
+                        </td>
+                        <td
+                          class="align-middle m-0 my-auto text-end text-center d-flex"
+                          style="gap: 1rem; padding: 1rem"
+                        >
+                          <form
+                            action="/customer-management/update/<%= item.id %>"
+                          >
+                            <button
+                              class="update btn btn-primary m-0"
+                              id="update-customer"
+                            >
+                              Update
+                            </button>
+                          </form>
+
+                          <button
+                            class="btn-del-customer del btn btn-danger m-0"
+                            data-id="<%= item.id %>"
+                          >
+                            Del
+                          </button>
+                        </td>
+                      </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+
+          <!-- add customer -->
+          <div class="add-customer-form">
+            <div id="close-add-customer-btn" class="fas fa-times"></div>
+
+            <form
+              action="/customer-management"
+              method="POST"
+              id="create-customer-form"
+              enctype="multipart/form-data"
+            >
+              <h3 class="text-center">Customer</h3>
+
+              <% if (type != 'login') { %> <% if (error) { %>
+              <p
+                class="message-error"
+                style="
+                  background-color: var(--dangerous);
+                  padding: 0.4rem;
+                  text-align: center;
+                  color: white;
+                  border-radius: 8px;
+                  margin-bottom: 0.5rem;
+                  margin-top: 1rem;
+                "
+              >
+                <%= error %>
+              </p>
+              <% }} %>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <span>Username</span>
+                    <input
+                      type="text"
+                      name="username"
+                      class="form-control"
+                      placeholder="user1234"
+                      id="username"
+                    />
+                    <span class="form-message"></span>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <span>Password</span>
+                    <input
+                      type="password"
+                      name="password"
+                      class="form-control"
+                      placeholder="*********"
+                      id="password"
+                    />
+                    <span class="form-message"></span>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <span>Email</span>
+                    <input
+                      type="email"
+                      name="email"
+                      class="form-control"
+                      placeholder="email123@gmail.com"
+                      id="email"
+                    />
+                    <span class="form-message"></span>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <span>Phone Number</span>
+                    <input
+                      type="text"
+                      name="phoneNumber"
+                      class="form-control"
+                      placeholder="0394 123 456"
+                      id="phoneNumber"
+                    />
+                    <span class="form-message"></span>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <span>Full Name</span>
+                    <input
+                      type="text"
+                      name="fullName"
+                      class="form-control"
+                      placeholder="Nguyễn Văn A"
+                      id="fullName"
+                    />
+                    <span class="form-message"></span>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <span>Address</span>
+                    <input
+                      type="text"
+                      name="address"
+                      class="form-control"
+                      placeholder="Hải Châu - Đà Nẵng"
+                      id="address"
+                    />
+                    <span class="form-message"></span>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <span>Avatar</span>
+                    <input
+                      type="file"
+                      name="avatar"
+                      class="form-control"
+                      id="avatar"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="btn-addCustomer mt-4 text-center">
+                <input
+                  type="submit"
+                  value="Create Customer"
+                  class="btn btn-primary pe-3 ps-3 text-md"
+                />
+              </div>
+            </form>
+          </div>
+
+          <!-- question delete -->
+          <div class="quesDel">
+            <div class="main">
+              <div class="content">
+                <h3>You definitely want to delete this user?</h3>
+                <div class="btn-reply d-flex mt-3">
+                  <button id="yes">Yes</button>
+                  <button id="no">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <% include ./partials/extend.ejs %>
+    <script src="/js/login.js"></script>
+    <script src="/js/customer.js"></script>
+  </body>
+</html>

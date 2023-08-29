@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ./partials/head.ejs %>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/forbidden.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="box text-center">
+        <div class="image dog">
+          <img
+            src="/img/dog-family-colored-doodle-drawing.jpg"
+            alt=""
+            style="height: 100%"
+          />
+        </div>
+        <div class="image fence">
+          <img src="/img/wood-fence.png" alt="" style="height: 100%" />
+        </div>
+        <p style="color: #242424">
+          Sorry, you do not have permission to access this service!
+        </p>
+        <p><a href="/">Please, go back this way.</a></p>
+      </div>
+    </div>
+  </body>
+</html>

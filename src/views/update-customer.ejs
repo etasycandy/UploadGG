@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ./partials/head.ejs %>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body class="g-sidenav-show bg-gray-200">
+    <% include ./partials/navbar.ejs %>
+
+    <main
+      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
+    >
+      <div class="comp-list">
+        <div class="container-fluid py-4">
+          <!--  -->
+          <div class="mb-md-0 mb-4">
+            <div class="card my-4">
+              <div
+                class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
+              >
+                <div
+                  class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
+                >
+                  <h6 class="text-white text-capitalize ps-3">
+                    Customer management
+                  </h6>
+                </div>
+              </div>
+              <div class="card-body px-0 pb-2 pt-3">
+                <div class="update-form">
+                  <form
+                    action="/customer-management/update/<%= customer.id %>"
+                    method="POST"
+                    id="updateCustomerForm"
+                    enctype="multipart/form-data"
+                  >
+                    <h3 class="text-center">Update Customer</h3>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span>Username</span>
+                          <input
+                            type="text"
+                            name="username"
+                            class="form-control"
+                            placeholder="user1234"
+                            id="username"
+                            value="<%= customer.username%>"
+                          />
+                          <span class="form-message"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span>Password</span>
+                          <input
+                            type="text"
+                            name="passwordSwap"
+                            class="form-control"
+                            placeholder="*********"
+                            id="passwordSwap"
+                          />
+                          <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="*********"
+                            id="password"
+                            value="<%= customer.password%>"
+                            hidden
+                          />
+                          <span class="form-message"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span>Email</span>
+                          <input
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="email123@gmail.com"
+                            id="email"
+                            value="<%= customer.email%>"
+                          />
+                          <span class="form-message"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span>Phone Number</span>
+                          <input
+                            type="text"
+                            name="phoneNumber"
+                            class="form-control"
+                            placeholder="0394 123 456"
+                            id="phoneNumber"
+                            value="<%= customer.phoneNumber %>"
+                          />
+                          <span class="form-message"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-12">
+                        <div class="form-group">
+                          <span>Full Name</span>
+                          <input
+                            type="text"
+                            name="fullName"
+                            class="form-control"
+                            placeholder="Nguyễn Văn A"
+                            id="fullName"
+                            value="<%= customer.fullName%>"
+                          />
+                          <span class="form-message"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-12">
+                        <div class="form-group">
+                          <span>Address</span>
+                          <input
+                            type="text"
+                            name="address"
+                            class="form-control"
+                            placeholder="Hải Châu - Đà Nẵng"
+                            id="address"
+                            value="<%= customer.address%>"
+                          />
+                          <span class="form-message"></span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <span>Avatar</span>
+                          <input
+                            type="file"
+                            name="avatar"
+                            class="form-control"
+                            id="avatar"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="btn-addComp mt-3 text-center">
+                      <input
+                        type="submit"
+                        value="Update"
+                        class="btn btn-primary pe-3 ps-3 text-md"
+                      />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <% include ./partials/extend.ejs %>
+    <script src="/js/login.js"></script>
+    <script src="/js/customer.js"></script>
+  </body>
+</html>

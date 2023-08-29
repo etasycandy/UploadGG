@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ./partials/head.ejs %>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
+  <body class="g-sidenav-show bg-gray-200">
+    <div class="container-fluid">
+      <div class="container">
+        <form
+          action="/register"
+          class="register-form <%= type %>"
+          method="POST"
+          id="register-form"
+          enctype="multipart/form-data"
+        >
+          <h3 class="text-center fw-bold">Register</h3>
+
+          <% if (type != 'login') { %> <% if (error) { %>
+          <p class="message-error"><%= error %></p>
+          <% }} %>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <span>Username</span>
+                <input
+                  type="text"
+                  name="username"
+                  class="form-control"
+                  placeholder="user1234"
+                  id="username"
+                />
+                <span class="form-message"></span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <span>Password</span>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="*********"
+                  id="password"
+                />
+                <span class="form-message"></span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <span>Email</span>
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="email123@gmail.com"
+                  id="email"
+                />
+                <span class="form-message"></span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <span>Phone Number</span>
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  class="form-control"
+                  placeholder="0394 123 456"
+                  id="phoneNumber"
+                />
+                <span class="form-message"></span>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group">
+                <span>Full Name</span>
+                <input
+                  type="text"
+                  name="fullName"
+                  class="form-control"
+                  placeholder="Nguyễn Văn A"
+                  id="fullName"
+                />
+                <span class="form-message"></span>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group">
+                <span>Address</span>
+                <input
+                  type="text"
+                  name="address"
+                  class="form-control"
+                  placeholder="Hải Châu - Đà Nẵng"
+                  id="address"
+                />
+                <span class="form-message"></span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <span>Avatar</span>
+                <input
+                  type="file"
+                  name="avatar"
+                  class="form-control"
+                  id="avatar"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <input
+              type="submit"
+              value="Register"
+              class="btn btn-primary btn-register pe-3 ps-3"
+            />
+          </div>
+          <p>I have an account? <a href="/login"> Sign in!</a></p>
+        </form>
+      </div>
+    </div>
+
+    <% include ./partials/extend.ejs %>
+    <script src="/js/login.js"></script>
+  </body>
+</html>

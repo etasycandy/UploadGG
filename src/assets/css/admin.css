@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+:root {
+  --dangerous: #fc4541;
+  --error: #f7b932;
+  --suscess: #39b74b;
+  --green: #27ae60;
+  --dark-color: #219150;
+  --yellow-dark: #fc9e09;
+  --white-dark: rgb(230, 230, 230);
+  --purple-light: #6367ea;
+  --black: #444;
+  --light-color: #666;
+  --border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  --border-hover: 0.1rem solid var(--black);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: all 0.2s linear;
+  transition: width none;
+}
+
+html {
+  font-size: 100%;
+  overflow-x: hidden;
+  scroll-padding-top: 5rem;
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+  width: 1rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--black);
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: var(--green);
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message {
+  background-color: var(--dangerous);
+  padding: 0.4rem;
+  text-align: center;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  display: none;
+}
+
+/* Add customer form */
+.add-customer-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  position: fixed;
+  top: 0;
+  right: -105%;
+  z-index: 10000;
+  height: 100%;
+  width: 100%;
+}
+
+.add-customer-form.active {
+  right: 0;
+}
+
+.add-customer-form form {
+  background: #fff;
+  border: var(--border);
+  width: 50rem;
+  max-height: 90%;
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  border-radius: 0.5rem;
+  margin: 2rem;
+  overflow-y: auto;
+}
+
+.add-customer-form form .form-control {
+  border: var(--border);
+  padding: 0.5rem 0.7rem;
+}
+
+.add-customer-form form .form-control:focus {
+  border-color: var(--green);
+  box-shadow: var(--box-shadow);
+}
+
+.add-customer-form form span {
+  display: block;
+  font-size: 15px;
+  padding-top: 1rem;
+}
+
+.add-customer-form form .form-message {
+  padding-top: 0;
+}
+
+form .box:focus {
+  border-color: green;
+}
+
+.add-customer-form form .invalid .form-control {
+  border-color: red;
+}
+.invalid .form-message {
+  color: red;
+}
+
+.add-customer-form #close-add-customer-btn {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  font-size: 3rem;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.update-form form .row {
+  padding: 0 3rem 1rem;
+}
+
+.update-form form .form-control {
+  border: var(--border);
+  padding: 0.5rem 0.7rem;
+}
+
+.update-form form .form-control:focus {
+  border-color: var(--green);
+  box-shadow: var(--box-shadow);
+}
+
+.update-form form span {
+  display: block;
+  font-size: 15px;
+  padding-top: 1rem;
+}
+
+.update-form form .form-message {
+  padding-top: 0;
+}
+
+form .box:focus {
+  border-color: green;
+}
+
+.update-form form .invalid .form-control {
+  border-color: red;
+}
+.invalid .form-message {
+  color: red;
+}
+
+.w-limit {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 13rem;
+}
+
+.w-limit-2 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 30rem;
+}
+
+.quesDel {
+  display: none;
+}
+.quesDel.active {
+  display: block;
+}
+
+.quesDel .main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  height: 100%;
+  width: 100%;
+  /* display: none; */
+}
+
+.quesDel .content {
+  background: #fff;
+  border: var(--border);
+  width: fit-content;
+  max-height: 90%;
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  border-radius: 0.5rem;
+  margin: 2rem;
+  overflow-y: auto;
+}
+
+.quesDel .content h3 {
+  font-size: 120%;
+}
+
+.quesDel .content .btn-reply {
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.quesDel .content .btn-reply button {
+  width: 4rem;
+  padding: 0.3rem 0;
+  border-radius: 0.3rem;
+  box-shadow: var(--box-shadow);
+}
+
+.quesDel .content .btn-reply #yes:hover {
+  background-color: var(--suscess);
+  color: white;
+}
+
+.quesDel .content .btn-reply #no:hover {
+  background-color: var(--dangerous);
+  color: white;
+}
+
+.quesDelUser {
+  display: none;
+}
+.quesDelUser.active {
+  display: block;
+}
+
+.quesDelUser .main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  height: 100%;
+  width: 100%;
+  /* display: none; */
+}
+
+.quesDelUser .content {
+  background: #fff;
+  border: var(--border);
+  width: fit-content;
+  max-height: 90%;
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  border-radius: 0.5rem;
+  margin: 2rem;
+  overflow-y: auto;
+}
+
+.quesDelUser .content h3 {
+  font-size: 120%;
+}
+
+.quesDelUser .content .btn-reply {
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.quesDelUser .content .btn-reply button {
+  width: 4rem;
+  padding: 0.3rem 0;
+  border-radius: 0.3rem;
+  box-shadow: var(--box-shadow);
+}
+
+.quesDelUser .content .btn-reply #yes-user:hover {
+  background-color: var(--suscess);
+  color: white;
+}
+
+.quesDelUser .content .btn-reply #no-user:hover {
+  background-color: var(--dangerous);
+  color: white;
+}
+
+.mess-error {
+  display: none;
+}
+.mess-error.active {
+  display: block;
+}
+
+.mess-error .main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  height: 100%;
+  width: 100%;
+  /* display: none; */
+}
+
+.mess-error .content {
+  background: #fff;
+  border: var(--border);
+  width: fit-content;
+  max-height: 90%;
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  border-radius: 0.5rem;
+  margin: 2rem;
+  position: relative;
+}
+
+.mess-error .content h3 {
+  font-size: 120%;
+}
+
+.mess-error .content button {
+  padding: 0;
+  margin: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  box-shadow: var(--box-shadow);
+  position: absolute;
+  right: -10px;
+  top: -10px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hideScroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hideScroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.document{
+  cursor: pointer;
+}
+.document:hover{
+  background-color: #0000000b;
+}
